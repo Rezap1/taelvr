@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- Background Shield/Pentagon -->
+  <path d="M 100 10 L 190 60 L 170 180 L 30 180 L 10 60 Z" fill="#FFD700" stroke="#1A1A1A" stroke-width="6" stroke-linejoin="round"/>
+  
+  <!-- Outer Text Arc (Approximation) -->
+  <path id="curve" d="M 40 80 A 70 70 0 0 1 160 80" fill="transparent" />
+  <text font-family="Arial, sans-serif" font-weight="bold" font-size="18" fill="#1A1A1A">
+    <textPath href="#curve" startOffset="50%" text-anchor="middle">UNIVERSITAS SURYAKANCANA</textPath>
+  </text>
+  
+  <!-- Center abstract flame/plant -->
+  <path d="M 100 60 Q 120 100 100 140 Q 80 100 100 60 Z" fill="#DC2626" />
+  
+  <!-- Bottom Text -->
+  <text x="100" y="165" font-family="Arial, sans-serif" font-weight="bold" font-size="24" text-anchor="middle" fill="#1A1A1A">UNSUR</text>
+</svg>

@@ -1,0 +1,419 @@
+/* Elvira Virtual Assistant Styles */
+:root {
+    --elvira-primary: #F4C542;
+    --elvira-primary-hover: #e3b632;
+    --elvira-dark: #28282B;
+    --elvira-gray: #F2F2F2;
+    --elvira-white: #FFFFFF;
+}
+
+/* Floating Button */
+.elvira-floating-btn {
+    position: fixed;
+    top: 100px;
+    right: 30px;
+    bottom: auto;
+    left: auto;
+    width: auto;
+    height: 260px; /* Make her larger */
+    background-color: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1040;
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    border: none;
+    padding: 0;
+    animation: elviraFloat 4s infinite ease-in-out;
+    transform-origin: bottom center;
+}
+
+.elvira-floating-btn.chat-open {
+    right: 390px; /* Keep her on the left of the offcanvas, pushed left to fit new width */
+    left: auto;
+    height: 480px; /* Significantly enlarge the character when chatting */
+    z-index: 1050; /* Places it above the offcanvas backdrop */
+    animation: none; /* Disables floating while chatting for stability */
+}
+
+.elvira-floating-btn:hover {
+    transform: scale(1.05);
+    box-shadow: none;
+}
+
+.elvira-floating-btn img {
+    width: auto;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 0;
+    background-color: transparent;
+    animation: elviraBreathe 3.5s infinite ease-in-out;
+    transform-origin: bottom center;
+}
+
+/* Greeting Bubble (First Visit) */
+.elvira-greeting-bubble {
+    position: fixed;
+    top: 120px; /* Next to her */
+    right: 140px; /* Pushed a bit more to the left to avoid the larger character */
+    bottom: auto;
+    left: auto;
+    background-color: var(--elvira-white);
+    padding: 0;
+    border-radius: 15px 0 15px 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    width: 280px;
+    z-index: 1040;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    flex-direction: column;
+    pointer-events: none;
+    border: 1px solid #eaeaea;
+}
+
+.elvira-greeting-bubble.show {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.elvira-greeting-bubble::after {
+    content: '';
+    position: absolute;
+    top: 20px;
+    right: -10px;
+    bottom: auto;
+    left: auto;
+    border-width: 10px 0 10px 10px;
+    border-style: solid;
+    border-color: transparent transparent transparent var(--elvira-white);
+}
+
+
+.elvira-greeting-content {
+    padding: 20px;
+    font-size: 0.9rem;
+    color: var(--elvira-dark);
+    line-height: 1.5;
+}
+
+.elvira-greeting-close {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: var(--elvira-white);
+    border: 1px solid #eaeaea;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    color: var(--elvira-dark);
+    z-index: 2;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.elvira-greeting-close:hover {
+    background: #fff;
+    transform: scale(1.05);
+}
+
+/* Offcanvas Customization */
+.elvira-offcanvas {
+    width: 380px !important;
+    border-left: none;
+    box-shadow: -5px 0 25px rgba(0,0,0,0.1);
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    background-color: var(--elvira-gray);
+}
+
+.elvira-offcanvas .offcanvas-header {
+    background-color: var(--elvira-primary);
+    color: var(--elvira-dark);
+    border-top-left-radius: 20px;
+    padding: 1rem 1.5rem;
+}
+
+.elvira-header-profile {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.elvira-header-profile img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid var(--elvira-white);
+    object-fit: cover;
+    background-color: var(--elvira-white);
+    animation: elviraBreathe 3.5s infinite ease-in-out;
+}
+
+.elvira-header-info h5 {
+    margin: 0;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.elvira-header-info p {
+    margin: 0;
+    font-size: 0.8rem;
+    opacity: 0.9;
+}
+
+.elvira-btn-close {
+    background: transparent;
+    border: none;
+    font-size: 1.2rem;
+    color: var(--elvira-dark);
+    opacity: 0.7;
+    transition: opacity 0.2s;
+    cursor: pointer;
+}
+
+.elvira-btn-close:hover {
+    opacity: 1;
+}
+
+/* Offcanvas Body Layout */
+.elvira-body-layout {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* Chat Section */
+.elvira-chat-history {
+    flex-grow: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background-color: var(--elvira-gray);
+}
+
+.elvira-chat-history::-webkit-scrollbar {
+    width: 6px;
+}
+.elvira-chat-history::-webkit-scrollbar-track {
+    background: transparent;
+}
+.elvira-chat-history::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 3px;
+}
+
+.elvira-message {
+    display: flex;
+    flex-direction: column;
+    max-width: 85%;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.elvira-message.bot {
+    align-self: flex-start;
+}
+
+.elvira-message.user {
+    align-self: flex-end;
+    align-items: flex-end;
+}
+
+.elvira-bubble {
+    padding: 12px 16px;
+    border-radius: 15px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--elvira-dark);
+}
+
+.elvira-message.bot .elvira-bubble {
+    background-color: var(--elvira-white);
+    border: 1px solid #eaeaea;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    border-bottom-left-radius: 5px;
+}
+
+.elvira-message.user .elvira-bubble {
+    background-color: var(--elvira-primary);
+    border-bottom-right-radius: 5px;
+    font-weight: 500;
+}
+
+/* Action Buttons inside Chat */
+.elvira-action-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.elvira-action-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--elvira-white);
+    color: var(--elvira-dark);
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    border: 1px solid #eaeaea;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+    cursor: pointer;
+    text-align: left;
+    width: 100%;
+}
+
+.elvira-action-btn:hover {
+    background-color: var(--elvira-primary);
+    border-color: var(--elvira-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.elvira-action-btn i {
+    font-size: 0.8rem;
+    color: var(--elvira-dark);
+}
+
+/* Typing Indicator */
+.typing-indicator {
+    display: flex;
+    gap: 4px;
+    padding: 12px 16px;
+    background: var(--elvira-white);
+    border: 1px solid #eaeaea;
+    border-radius: 15px;
+    width: fit-content;
+    border-bottom-left-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    animation: fadeIn 0.3s ease;
+}
+
+.typing-dot {
+    width: 6px;
+    height: 6px;
+    background-color: #999;
+    border-radius: 50%;
+    animation: typing 1.4s infinite ease-in-out both;
+}
+
+.typing-dot:nth-child(1) { animation-delay: -0.32s; }
+.typing-dot:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes typing {
+    0%, 80%, 100% { transform: scale(0); }
+    40% { transform: scale(1); }
+}
+
+/* Footer Panel */
+.elvira-offcanvas-footer {
+    padding: 15px;
+    background-color: var(--elvira-white);
+    border-top: 1px solid #eaeaea;
+    text-align: center;
+    border-bottom-left-radius: 20px;
+}
+
+.elvira-reset-btn {
+    font-size: 0.8rem;
+    padding: 6px 15px;
+    font-weight: 600;
+}
+
+.elvira-footer-text {
+    font-size: 0.7rem;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+    .elvira-floating-btn {
+        height: 120px;
+        top: 80px;
+        right: 15px;
+        bottom: auto;
+        left: auto;
+    }
+    .elvira-greeting-bubble {
+        top: 95px;
+        right: 110px;
+        bottom: auto;
+        left: auto;
+        width: calc(100vw - 30px);
+        max-width: 300px;
+    }
+    .elvira-offcanvas {
+        width: 100% !important;
+        border-radius: 0;
+    }
+    .elvira-offcanvas .offcanvas-header {
+        border-radius: 0;
+        padding: 10px 15px;
+    }
+    .elvira-header-profile img {
+        width: 40px;
+        height: 40px;
+    }
+    .elvira-header-info h5 {
+        font-size: 1rem;
+    }
+    .elvira-chat-history {
+        padding: 10px;
+    }
+    .elvira-message {
+        max-width: 95%;
+    }
+    .elvira-floating-btn.chat-open {
+        display: none; /* Hide character entirely on small mobile screens when chat is open to save space */
+    }
+}
+
+/* Animations for making character alive */
+.elvira-blink {
+    animation: blink 0.2s ease-in-out 2;
+}
+.elvira-nod {
+    animation: nod 0.4s ease-in-out;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+}
+
+@keyframes nod {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(5px); }
+}
+
+@keyframes elviraBreathe {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+}
+
+@keyframes elviraFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}

@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /search
+Disallow: /*?q=*
+
+Allow: /
+
+Sitemap: /sitemap.xml
