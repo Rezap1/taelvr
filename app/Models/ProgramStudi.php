@@ -70,6 +70,11 @@ class ProgramStudi extends Model
         return $this->hasMany(Biaya::class, 'program_studi_id');
     }
 
+    public function prestasi(): HasMany
+    {
+        return $this->hasMany(Prestasi::class, 'program_studi_id');
+    }
+
     // =========================================================================
     // Scopes
     // =========================================================================

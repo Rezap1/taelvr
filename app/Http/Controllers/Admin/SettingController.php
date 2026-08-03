@@ -24,7 +24,7 @@ class SettingController extends Controller
         return view('admin.settings.index', compact('settings'));
     }
 
-    public function store(Request $request)
+    public function update(Request $request)
     {
         $input = $request->except(['_token', '_method']);
         
